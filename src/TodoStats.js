@@ -34,8 +34,14 @@ class TodoStats extends React.Component {
             }]
     };
 
-    var options = {}
+    var options = {
+      responsive: true
+    }
 
+    if (this.myChart) {
+        this.myChart.destroy()
+        this.myChart = null
+    }
     this.myChart = new Chart(ctx,{
         type: 'pie',
         data: data,
@@ -52,7 +58,7 @@ class TodoStats extends React.Component {
     return (
       <div>
         <p>{`${this.props.todos.length} TODOs`}</p>
-        <canvas id="myChart" style={{width: 200, height: 200}}></canvas>
+        <canvas id="myChart"></canvas>
       </div>
     )
   }
