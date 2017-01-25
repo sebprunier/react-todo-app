@@ -4,6 +4,7 @@ import TodoForm from './TodoForm'
 import TodoStats from './TodoStats'
 import TodoFilters from './TodoFilters'
 import TodoList from './TodoList'
+import GeoPosition from './GeoPosition'
 
 class TodoApp extends Component {
 
@@ -57,6 +58,9 @@ class TodoApp extends Component {
     return (
       <div className="row">
         <div className="col s4">
+          <div>
+            <GeoPosition />
+          </div>
           <div>
             <h3>Nouveau</h3>
             <TodoForm onNewTodo={this.handleNewTodo}/>
