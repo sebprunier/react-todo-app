@@ -11,12 +11,10 @@ class TodoStats extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    var ctx = document.getElementById("myChart");
-
     const counters = { NEW: 0, IN_PROGRESS: 0, DONE: 0 }
     nextProps.todos.forEach(t => counters[t.status] += 1)
 
-    var data = {
+    const data = {
         labels: Object.keys(Statuses),
         datasets: [
             {
@@ -38,11 +36,11 @@ class TodoStats extends React.Component {
       responsive: true
     }
 
-    if (this.myChart) {
-        this.myChart.destroy()
-        this.myChart = null
+    if (this.statusesChart) {
+        this.statusesChart.destroy()
+        this.statusesChart = null
     }
-    this.myChart = new Chart(ctx,{
+    this.statusesChart = new Chart(this.chartCanvas,{
         type: 'pie',
         data: data,
         options: options
@@ -50,15 +48,15 @@ class TodoStats extends React.Component {
   }
 
   componentWillUnmount() {
-    this.myChart.destroy()
-    this.myChart = null
+    this.statusesChart.destroy()
+    this.statusesChart = null
   }
 
   render () {
     return (
       <div>
         <p>{`${this.props.todos.length} TODOs`}</p>
-        <canvas id="myChart"></canvas>
+        <canvas ref={(canvas) => { this.chartCanvas = canvas }}></canvas>
       </div>
     )
   }
